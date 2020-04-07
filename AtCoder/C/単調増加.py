@@ -1,24 +1,34 @@
-from itertools import combinations
+# from itertools import combinations
+# from itertools import combinations_with_replacement
+# N = int(input())
+# lists = list(map(int, input().split()))
+# ans = []
+# tmp = []
+# for i in range(len(lists)):
+#   tmp.append(i+1)
+#   if i == len(lists) - 1:
+#     combi = combinations_with_replacement(tmp, 2)
+#     for a,b in combi:
+#       if a <= b:
+#         ans.append(tuple([a,b]))
+#     break
+#   # 次が大きくなければ、ここで処理
+#   if lists[i] >= lists[i+1]:
+#     combi = combinations_with_replacement(tmp, 2)
+#     for a,b in combi:
+#       if a <= b:
+#         ans.append(tuple([a,b]))
+#     tmp = []
+# print(len(ans))
+
+
 
 N = int(input())
-items = list(map(int, input().split()))
-is_ups = []
-tmp = 0
-for index in range(1, len(items)):
-  tmp+=1
-  if items[index-1] >= items[index]:
-    is_ups.append(tmp)
-    tmp=0
-
-if items[-2] <= items[-1]:
-  is_ups[-1] += 1
-else:
-  is_ups.append(1)
-
-ans = 0
-
-for count in is_ups:
-  ans += count
-  ans += len(list(combinations(range(count),2)))
-
+A = list(map(int, input().split()))
+p = 0
+ans = 1
+for i in range(1, N):
+    if A[i]<=A[i-1]:
+        p = i
+    ans += i-p+1
 print(ans)
