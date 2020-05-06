@@ -10,7 +10,7 @@ Can we assume inputs are valid or do we have to validate them?
 
 from enum import Enum, auto
 import random
-
+import sys
 
 class Suit(Enum):
     SPADE = auto()
@@ -72,10 +72,27 @@ class Hands():
         field.pusu(card)
 
     def info(self):
-        print("今のデッキはカードが {}枚存在しています".format(len(self.cards)))
+        print("今の手札はカードが {}枚存在しています".format(len(self.cards)))
         print("カードの詳細情報は")
         for card in self.cards:
             print("絵柄： {}, 値：　{}".format(card.suit, card.val))
+    
+    def total(self):
+        total_val = 0
+        for card in self.cards:
+            if card.val.value == 1:
+                print("Aを1として使うなら1を、11として使うなら2を選択してください")
+                howUse = int(input())
+                if howUse == 1:
+                    total_val += 1
+                elif howUse == 2:
+                    total_val += 11
+                else:
+                    print("値が不正です")
+                    sys.exit()
+            else:
+                total_val += card.val.value
+        return total_val
 
 class Field():
     def __init__(self):
@@ -102,9 +119,27 @@ for val in Val:
         card = Card(val, suit)
         deck.add(card)
 
+deck.shuffle()
 deck.info()
 
 if __name__ == "__main__":
     print("Game Start")
+    hand = Hands()
+    while True:
+        # カードをひく
+        hand.draw(deck)
+        
+        # 情報をみる
+        hand.info()
 
+        # 勝負する、もう一回引く
+        print("勝負するなら1を、もう一回引くなら2を選択してください")
+        is_battle = int(input())
+        if is_battle == 1:
+            break
+        elif is_battle != 2:
+            print("値が不正です")
+            sys.exit()
+    
+print(hand.total())
     
