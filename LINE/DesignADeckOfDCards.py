@@ -76,6 +76,8 @@ class Hands():
         print("カードの詳細情報は")
         for card in self.cards:
             print("絵柄： {}, 値：　{}".format(card.suit, card.val))
+        total = self.total()
+        print("合計値は、{}です".format(total))
     
     def total(self):
         total_val = 0
