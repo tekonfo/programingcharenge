@@ -11,9 +11,12 @@ for i in range(n):
     if x - a <= 0:
         continue
 
-    if ans > p:
-        ans = p
+    # if ans > p:
+    #     ans = p
+    ans = min(ans, p)
 
+
+# 1e10 は1_000_000_000_0とかでも同じものとなる。これ便利だな
 if ans != 1e10:
     print(ans)
 else:
