@@ -17,3 +17,6 @@ if odd_arr.islower() and even_arr.isupper():
     print('Yes')
 else:
     print('No')
+
+# 偶数奇数を判定する際に、X & 1を用いることでビット配列で判定ができる。これおもしろい
+# for i in range(len(s))の場合、 i & 1 で偶数奇数判定ができる
